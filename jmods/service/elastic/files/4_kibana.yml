@@ -1,0 +1,44 @@
+
+- name: check if kibana has been downloaded
+  stat:
+    path: "{{kibana_root_dir}}"
+  register: kpath
+  tags:
+    - kibana
+    - setup
+    - never
+
+
+- name: Download and unpack kibana
+  unarchive:
+    remote_src: yes
+    src: https://artifacts.elastic.co/downloads/kibana/kibana-7.5.1-linux-x86_64.tar.gz
+    dest: "{{kibana_root_dir}}"
+
+  when: kpath.stat.isdir is not defined
+  tags:
+    - kibana
+    - setup
+    - never
+
+
+#use discovery_nodes var for elasticsearch.hosts param
+- name: update kibana config
+  template:
+    src: kibana.yml
+    dest: "{{kibana_root_dir}}/config"
+  tags:
+    - start
+    - kibana_config
+    - never
+
+
+- name: remove kibana
+  file:
+    path: '{{user_root_dir}}/kibana'
+    state: absent
+
+  when: kpath.stat.isdir is defined
+  tags:
+    - kibana_remove
+    - never

@@ -1,0 +1,27 @@
+
+- name: truncate json when shorter_data flag is true
+  shell: head -n 100000 reviews_Electronics_5.json > shorter_reviews.json
+  when: "shorter_data == true"
+
+- name: copy es_scripts.py
+  copy:
+    src: '{{module_root}}/files/es_scripts.py'
+    dest: "{{home}}"
+  tags:
+    - copy_script
+
+
+- debug:
+    var: replicas
+
+
+- debug:
+    msg: python3 es_scripts.py {{shards}} {{hard_replicas}} reviews_rf{{replicas}}_s{{shards}}_csize{{clustersize}} {{hostname}} {{shorter_data}} > outputfile.txt
+
+
+- name: run indexing script
+  shell: python3 es_scripts.py {{shards}} {{hard_replicas}} reviews_rf{{replicas}}_s{{shards}}_csize{{clustersize}} {{hostname}} {{shorter_data}} > outputfile.txt
+  async: 999
+  poll: 5
+  tags:
+    - run_script

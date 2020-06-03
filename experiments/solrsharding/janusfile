@@ -1,0 +1,18 @@
+add modules cloud-env zookeeper solr amazon-reviews-large index_solr http_closed_loop solr_pipe cdf all
+order modules cloud-env zookeeper solr amazon-reviews-large index_solr http_closed_loop solr_pipe cdf all
+add vars zoo_version 3.5.5 all
+add vars solr_version dporter_8_3 solr_heap 1 solr_repo https://github.com/DavidCPorter/lucene-solr.git all
+add vars endpoint_host 172.21.0. endpoint_port 8983 all
+add vars replicas 2 shards 1 shard1
+add vars replicas 2 shards 2 shard2
+add vars replicas 2 shards 4 shard4
+add vars shorter_data yes all
+add hosts zookeeperNodes zookeeper all
+add hosts twoNode solr all
+add hosts generatorNode http_closed_loop all
+add hosts localhost solr_pipe all
+add hosts generatorNode solr_pipe 2_read_results.yml all
+add hosts localhost cdf all
+add hosts singleNode index_solr all
+add hosts singleNode amazon-reviews-large all
+add hosts twoNode index_solr 0_pre_index_config.yml all

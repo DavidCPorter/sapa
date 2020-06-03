@@ -1,0 +1,15 @@
+collection_name: 1_2_index
+data_upload_dir: /home/janususer
+engine: solr
+instances: 0
+load_duration: 10
+loop_type: closed
+processes: 4
+query: roundrobin
+replicas: 2
+shards: 1
+solr_home: /home/janususer/solr-dporter_8_3/solr/server/solr
+solr_install_dir: /home/janususer/solr-dporter_8_3
+solrconfig_xml_dest: /home/janususer/solr-dporter_8_3/solr/server/solr/configsets/_default/conf/solrconfig.xml
+solrnum: 2
+threads: 1

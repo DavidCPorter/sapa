@@ -1,0 +1,157 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-0">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-0"/>
+<emulab:blockstore name="bs0" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-1">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-1"/>
+<emulab:blockstore name="bs1" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-2">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-2"/>
+<emulab:blockstore name="bs2" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-3">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-3"/>
+<emulab:blockstore name="bs3" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-4">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-4"/>
+<emulab:blockstore name="bs4" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-5">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-5"/>
+<emulab:blockstore name="bs5" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-6">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-6"/>
+<emulab:blockstore name="bs6" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="node-7">
+  <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://www.emulab.net/protogeni/jacks-stable/images/server.svg"/>
+  <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="raw-pc">
+    <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"/>
+  </sliver_type>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-7"/>
+<emulab:blockstore name="bs7" mountpoint="/mydata" class="local" size="50GB" placement="any"/>
+  <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  <hardware_type xmlns="http://www.geni.net/resources/rspec/3" name="m510"/>
+</node>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-0"><link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-0"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-1"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-2"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-3"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-4"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-5"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-6"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-7"/>
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-0" dest_id="interface-1" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-0" dest_id="interface-2" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-0" dest_id="interface-3" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-0" dest_id="interface-4" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-0" dest_id="interface-5" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-0" dest_id="interface-6" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-0" dest_id="interface-7" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-1" dest_id="interface-0" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-1" dest_id="interface-2" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-1" dest_id="interface-3" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-1" dest_id="interface-4" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-1" dest_id="interface-5" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-1" dest_id="interface-6" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-1" dest_id="interface-7" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-2" dest_id="interface-0" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-2" dest_id="interface-1" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-2" dest_id="interface-3" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-2" dest_id="interface-4" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-2" dest_id="interface-5" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-2" dest_id="interface-6" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-2" dest_id="interface-7" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-3" dest_id="interface-0" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-3" dest_id="interface-1" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-3" dest_id="interface-2" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-3" dest_id="interface-4" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-3" dest_id="interface-5" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-3" dest_id="interface-6" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-3" dest_id="interface-7" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-4" dest_id="interface-0" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-4" dest_id="interface-1" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-4" dest_id="interface-2" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-4" dest_id="interface-3" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-4" dest_id="interface-5" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-4" dest_id="interface-6" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-4" dest_id="interface-7" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-5" dest_id="interface-0" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-5" dest_id="interface-1" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-5" dest_id="interface-2" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-5" dest_id="interface-3" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-5" dest_id="interface-4" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-5" dest_id="interface-6" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-5" dest_id="interface-7" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-6" dest_id="interface-0" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-6" dest_id="interface-1" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-6" dest_id="interface-2" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-6" dest_id="interface-3" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-6" dest_id="interface-4" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-6" dest_id="interface-5" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-6" dest_id="interface-7" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-7" dest_id="interface-0" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-7" dest_id="interface-1" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-7" dest_id="interface-2" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-7" dest_id="interface-3" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-7" dest_id="interface-4" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-7" dest_id="interface-5" />
+<property xmlns="http://www.geni.net/resources/rspec/3" source_id="interface-7" dest_id="interface-6" />
+<site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="undefined"/>
+</link>
+</rspec>

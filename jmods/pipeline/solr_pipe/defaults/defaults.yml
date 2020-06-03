@@ -1,0 +1,7 @@
+---
+output_dir: "{{home}}/traffic_gen"
+deploy_name: "{{branch_name}}"
+local_data_dir: "{{JANUS_HOME}}/data_dir"
+result_filename: "rf{{replicas}}_s{{shards}}__clustersize{{solrnum}}::query={{query}}::proc={{processes}}::threads={{threads}}::dur={{load_duration}}.csv"
+csv_location: "{{output_dir}}"
+duration: "{{load_duration}}"

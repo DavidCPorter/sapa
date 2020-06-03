@@ -1,0 +1,23 @@
+---
+- name: copy words.txt to load
+  copy:
+    src: "{{module_root}}/files/words.txt"
+    dest: "{{home}}/traffic_gen/words.txt"
+  tags:
+    - activate
+
+- name: LOAD --> running load scripts
+  template:
+    src: "{{module_root}}/templates/remotescript.sh"
+    dest: "{{home}}/traffic_gen/remotescript.sh"
+    force: yes
+  tags:
+    - activate
+
+- name: running script
+  shell: bash remotescript.sh
+  args:
+    chdir: "{{home}}/traffic_gen"
+  tags:
+    - activate
+

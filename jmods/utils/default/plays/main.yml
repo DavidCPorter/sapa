@@ -1,0 +1,32 @@
+- hosts: allNodes
+  vars:
+    id_rsa_pub_path: "/Users/{{local_user}}/.ssh/id_rsa.pub"
+
+  tasks:
+    - name: configure rsa on docker machines
+      block:
+        - name: mkdir .ssh
+          file:
+            path: "{{home}}/.ssh"
+            state: directory
+
+        - name: move idrsa.pub into authorized keys
+          template:
+            src: "{{id_rsa_pub_path}}"
+            dest: "{{home}}/.ssh/authorized_keys"
+
+      tags:
+        - rsa_config
+
+
+    - name: install numpy
+      shell: pip3 install numpy
+      tags:
+        - numpy
+
+    - name: configure utils.sh
+      template:
+        src: "{{module_root}}/templates/utils.sh"
+        dest: "{{JANUS_HOME}}/utils/local_variables.sh"
+      tags:
+        - local_variables

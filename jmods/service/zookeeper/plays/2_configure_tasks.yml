@@ -1,0 +1,80 @@
+---
+#SECTIONS OF THIS PLAY:
+# activate
+# check activate
+# deactivate
+
+
+#### ACTIVATE ####
+- block:
+  - name: ZOO ---> remove zoo_sample.cfg
+    file:
+      path: '{{zoo_conf_dir}}/zoo_sample.cfg'
+      state: absent
+    ignore_errors: yes
+
+
+  - name: ZOO ---> remove zoo.cfg
+    file:
+      path: '{{zoo_conf_dir}}/zoo.cfg'
+      state: absent
+    ignore_errors: yes
+
+
+  - name: ZOO ---> copy zoo.cfg file to hosts
+    template:
+      src: '{{module_root}}/templates/zoo.cfg'
+      dest: '{{zoo_conf_dir}}/zoo.cfg'
+
+
+  - name: ZOO ---> copy zoo.sh file to conf dir
+    copy:
+      src: '{{module_root}}/files/zookeeper-env.sh'
+      dest: '{{zoo_conf_dir}}/zookeeper-env.sh'
+
+
+  - name: ZOO ---> create zookeeper data dir
+    file:
+      path: "/var/lib/zookeeper"
+      state: directory
+      mode: "777"
+      recurse: yes
+    become: yes
+    become_user: root
+
+  - name: ZOO ---> add zoo_id to "/var/lib/zookeeper"
+    copy:
+      content: "{{zoo_id}}"
+      dest: /var/lib/zookeeper/myid
+      mode: "777"
+    become: yes
+    become_user: root
+
+  - name: ZOO ---> add zookeeper_server.pid  to "/var/lib/zookeeper"
+    file:
+      path: /var/lib/zookeeper/zookeeper_server.pid
+      state: touch
+      mode: "777"
+    become: yes
+    become_user: root
+
+
+  - name: ZOO ---> compile zookeeper
+    shell: ant compile
+    args:
+      chdir: '{{zoo_root_dir}}'
+
+  tags:
+    - activate
+
+
+
+#### CHECK ACTIVATE ####
+
+
+#### DEACTIVATE ####
+- name: ZOO ---> no deactivate step
+  shell: echo "nothing to deactivate"
+  delegate_to: localhost
+  tags:
+    - deactivate

@@ -1,0 +1,12 @@
+chroot: twoNode
+solr_bin_exec: /home/janususer/solr-dporter_8_3/solr/bin/solr
+solr_git_branch_name: dporter_8_3
+solr_heap: 1
+solr_home: /home/janususer/solr-dporter_8_3/solr/server/solr
+solr_init_file: /Users/dporter/projects/janus/jmods/service/solr/templates/solr.in.sh
+solr_install_dir: /home/janususer/solr-dporter_8_3
+solr_log4j_props: /home/janususer/solr-dporter_8_3/solr/server/resources/log4j2.xml
+solr_log_dir: /var/solr/logs
+solr_repo: https://github.com/DavidCPorter/lucene-solr.git
+solr_version: dporter_8_3
+solrconfig_xml_dest: /home/janususer/solr-dporter_8_3/solr/server/solr/configsets/_default/conf/solrconfig.xml

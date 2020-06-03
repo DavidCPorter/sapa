@@ -1,0 +1,38 @@
+---
+#SECTIONS OF THIS PLAY:
+# activate
+# check activate
+# deactivate
+
+
+#### ACTIVATE ####
+
+- name: CLOUD-ENV ---> add aws credentials
+  copy:
+    src: "{{cred_dir}}"
+    dest: "{{home}}"
+  tags:
+    - activate
+
+#### CHECK ACTIVATE ####
+- name: CLOUD-ENV ---> check for aws file
+  stat:
+    path: "{{home}}/.aws"
+  register: checkpoint
+  failed_when: checkpoint.stat.isdir is not defined
+  tags:
+    - activate
+
+#### DEACTIVATE ####
+- name: CLOUD-ENV ---> remove aws_dir
+  file:
+    path: "{{home}}/.aws"
+    state: absent
+  tags:
+    - deactivate
+
+
+
+
+
+

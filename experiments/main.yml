@@ -1,0 +1,54 @@
+
+- hosts: "{{hosts_ui}}"
+
+  # JANUS main vars
+  vars:
+    module_root: "{{JANUS_HOME}}/jmods/{{stage}}/{{module}}"
+    user_root_dir: "{{home}}"
+
+  pre_tasks:
+
+  - name: include add vars varibles
+    include_vars: '{{branch_file_ui}}'
+    tags:
+      - always
+  - name: include globals
+    include_vars: '{{global_vars}}'
+    tags:
+      - always
+
+
+#  vars_files will not overwrite pretask vars if vars have been defined. but default vars which reference other default variables can accept pre_task variables (took a while to find 'pre_tasks' as a solution to this variable precedence problem.
+  vars_files:
+    - '{{module_root}}/defaults/defaults.yml'
+  gather_facts: no
+
+  tasks:
+
+  - name:
+    template:
+      src: '{{module_root}}/defaults/show_vars_file_tmp.yml'
+      dest: '{{show_vars_file}}'
+    delegate_to: localhost
+    tags:
+      - never
+      - vars_flag
+
+  - debug:
+      msg: "shorter_data flag = {{shorter_data}}"
+    tags:
+      - active
+
+  - name: evolve to active state,   hosts_ui -> tasks_file_ui
+    include_tasks: '{{module_root}}/plays/{{tasks_file_ui}}'
+    tags:
+      - activate
+      - utils
+      - never
+
+  - name: revert to inactive state,   hosts_ui -> tasks_file_ui
+    include_tasks: '{{module_root}}/plays/{{tasks_file_ui}}'
+    tags:
+      - deactivate
+      - never
+

@@ -1,0 +1,9 @@
+aws_dir: {{aws_dir}}
+aws_dir_name: {{aws_dir_name}}
+collection_name: {{collection_name}}
+index_solr: {{index_solr}}
+nfs_root: {{nfs_root}}
+replicas: {{replicas}}
+shards: {{shards}}
+shorter_data: {{shorter_data}}
+upload_data_file_path: {{upload_data_file_path}}

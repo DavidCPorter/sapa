@@ -1,0 +1,12 @@
+
+Host shard1
+  hostname 0.0.0.0
+  User dporter
+
+Host shard2
+  hostname 0.0.0.0
+  User dporter
+
+Host shard4
+  hostname 0.0.0.0
+  User dporter

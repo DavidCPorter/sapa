@@ -1,0 +1,9 @@
+engine,parallel_requests,QPS,median_lat,P95_latency(ms),clustersize,query,rfshards,GROUP,fcts
+ideal,0,25000,0,0,1,direct,0,1x,0
+ideal,0,50000,0,0,2,direct,0,1x,0
+ideal,0,100000,0,0,4,direct,0,1x,0
+ideal,0,200000,0,0,8,direct,0,1x,0
+ideal,0,6000,0,0,1,direct,0,2x,0
+ideal,0,12000,0,0,2,direct,0,2x,0
+ideal,0,24000,0,0,4,direct,0,2x,0
+ideal,0,48000,0,0,8,direct,0,2x,0

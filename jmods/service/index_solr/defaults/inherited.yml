@@ -1,0 +1,4 @@
+solr_install_dir:
+solr_home:
+solrconfig_xml_dest:
+data_upload_dir:

@@ -1,0 +1,29 @@
+module_order:
+  cloud-env:
+    1_install_tasks.yml: all
+    2_aws_tasks.yml: all
+  zookeeper:
+    1_download_tasks.yml: zookeeperNodes
+    2_configure_tasks.yml: zookeeperNodes
+    3_run_tasks.yml: zookeeperNodes
+  solr:
+    1_install_tasks.yml: twoNode
+    2_config_tasks.yml: twoNode
+    3_run_tasks.yml: twoNode
+  amazon-reviews-large:
+    download_json.yml: singleNode
+  index_solr:
+    0_pre_index_config.yml: twoNode
+    1_index.yml: singleNode
+    2_solr_aws.yml: singleNode
+    3_post_index_config.yml: singleNode
+  http_closed_loop:
+    0_pip_install.yml: generatorNode
+    1_copy_scripts.yml: generatorNode
+    2_run.yml: generatorNode
+  solr_pipe:
+    1_mkdir_data_local.yml: localhost
+    2_read_results.yml: generatorNode
+    3_append_results_to_total.yml: localhost
+  cdf:
+    1_generate_cdf.yml: localhost

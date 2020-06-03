@@ -1,0 +1,28 @@
+- hosts: all
+  tasks:
+    - name: mkdir .ssh
+      file:
+        path: "{{home}}/.ssh"
+        state: directory
+
+    - name: move idrsa.pub into authorized keys
+      template:
+        src: "{{id_rsa_pub_path}}"
+        dest: "{{home}}/.ssh/authorized_keys"
+
+
+#    - name: block
+#      block:
+##        no idea why ansible/touch doesn't have a way to create a file with -p option like mkdir -p <file>
+#        - name: mkdir .ssh
+#          file:
+#            path: "{{home}}/.ssh"
+#            state: touch
+#
+#        - name: copy pub key
+#          copy:
+#            src: /Users/dporter/.ssh/id_rsa.pub
+#            dest: "{{home}}/.ssh/tmp"
+#        - name: shell cat
+#          shell: cat "{{home}}/.ssh/tmp" > "{{home}}/.ssh/authorized_keys"
+

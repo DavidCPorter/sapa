@@ -1,0 +1,38 @@
+---
+# tasks file for upload_data
+- name: include the vars
+  include_vars: "{{JANUS_HOME}}/playbooks/roles/upload_data/defaults/main.yml"
+
+- name: pull AWS 8983 index
+  shell: aws s3 sync "s3://{{ansible_subnet}}/{{collection_name}}/default" .
+  ignore_errors: yes
+  no_log: True
+
+  args:
+    chdir: '{{solr_home}}'
+
+- name: pull AWS node__1 index
+  shell: aws s3 sync "s3://{{ansible_subnet}}/{{collection_name}}/node__1" .
+  ignore_errors: yes
+  no_log: True
+
+  args:
+    chdir: "{{user_root_dir}}/node__1"
+
+
+- name: pull AWS node__2 index
+  shell: aws s3 sync "s3://{{ansible_subnet}}/{{collection_name}}/node__2" .
+  ignore_errors: yes
+  no_log: True
+
+  args:
+    chdir: "{{user_root_dir}}/node__2"
+
+
+- name: pull AWS node__3 index
+  shell: aws s3 sync "s3://{{ansible_subnet}}/{{collection_name}}/node__3" .
+  ignore_errors: yes
+  no_log: True
+
+  args:
+    chdir: "{{user_root_dir}}/node__3"

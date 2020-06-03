@@ -1,0 +1,12 @@
+---
+- name: update Query Cache configs
+  script: '{{module_root}}/files/update_query_cache.sh {{ansible_subnet}} {{collection_name}}'
+  tags:
+    - update_query
+    - activate
+
+- name: update Doc Cache configs
+  script: '{{module_root}}/files/update_doc_cache.sh {{ansible_subnet}} {{collection_name}}'
+  tags:
+    - update_doc
+    - activate

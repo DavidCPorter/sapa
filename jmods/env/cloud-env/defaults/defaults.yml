@@ -1,0 +1,15 @@
+
+cred_dir: "{{module_root}}/files/.aws"
+ramdisk_path: /dev/shm
+ptp_install_dir: '/users/{{ansible_user}}/linuxptp'
+rem_user: '{{ansible_user}}'
+packages:
+  - awscli
+  - python3-pip
+  - python3-dev
+  - htop
+  - dstat
+  - maven
+  - ant
+  - virtualenv #required for pip
+

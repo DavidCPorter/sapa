@@ -1,0 +1,3 @@
+_cdf: ['generate_cdf']
+chart_type: cdf
+local_data_dir: /Users/dporter/projects/janus/data_dir

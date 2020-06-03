@@ -1,0 +1,9 @@
+endpoint_host: 172.21.0.
+endpoint_port: '8983'
+replicas: '2'
+shards: '1'
+shorter_data: 'yes'
+solr_heap: '1'
+solr_repo: https://github.com/DavidCPorter/lucene-solr.git
+solr_version: dporter_8_3
+zoo_version: 3.5.5

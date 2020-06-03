@@ -1,0 +1,6 @@
+csv_location: {{csv_location}}
+deploy_name: {{deploy_name}}
+duration: {{duration}}
+local_data_dir: {{local_data_dir}}
+output_dir: {{output_dir}}
+result_filename: {{result_filename}}

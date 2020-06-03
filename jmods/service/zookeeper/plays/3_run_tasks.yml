@@ -1,0 +1,15 @@
+---
+
+- name: ZOO ---> start ZooKeeper
+  shell: "{{zoo_bin_dir}}/zkServer.sh start"
+  ignore_errors: yes
+  tags:
+    - activate
+
+#- name: check started with valid error codes if any
+#  fail_when:
+
+- name: ZOO ---> stop zookeeper
+  shell: "{{zoo_bin_dir}}/zkServer.sh stop"
+  tags:
+    - deactivate

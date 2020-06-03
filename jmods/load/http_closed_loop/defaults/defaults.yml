@@ -1,0 +1,27 @@
+---
+
+http_closed_scripts_dir: "{{module_root}}/files"
+
+load_files:
+  - benchstats.py
+  - clparsing.py
+  - testmodes.py
+  - threadargs.py
+  - traffic_gen.py
+
+load_duration: 10
+#REPLICAS SHOULD ALWAYS BE INHERITED hence default value
+query: roundrobin
+loop_type: closed
+solrnum: 2
+#use 'default' as default engine
+engine: solr
+# following unnecessary yet required 4.3.2020
+threads: 1
+procs: 4
+processes: "{{procs}}"
+l_docker: true
+#should inherit these two
+endpoint_host: '172.21.0.'
+endpoint_port: 8983
+instances: 0

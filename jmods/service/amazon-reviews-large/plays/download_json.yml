@@ -1,0 +1,37 @@
+# tasks file for upload_data
+
+
+- name: Check if data has been downloaded already.
+  stat:
+    path: "{{data_upload_dir}}/reviews_Electronics_5.json"
+  register: data_download_path_status
+  tags:
+    - activate
+
+
+- name: download data
+  shell: wget http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Electronics_5.json.gz
+  args:
+    creates: "{{data_upload_dir}}/reviews_Electronics_5.json.gz"
+  when:
+    - data_download_path_status.stat.exists == False
+  tags:
+    - activate
+
+- name: unzip data
+  shell: gunzip -f reviews_Electronics_5.json.gz
+  args:
+    creates: '{{data_upload_dir}}/reviews_Electronics_5.json'
+    chdir: '{{data_upload_dir}}'
+  when:
+    - data_download_path_status.stat.exists == False
+  tags:
+    - activate
+
+
+#- name: AMZN_DOWNLOAD ---> remove doc set
+#  file:
+#    path: '{{data_upload_dir}}/reviews_Electronics_5.json'
+#    state: absent
+#  tags:
+#    - deactivate

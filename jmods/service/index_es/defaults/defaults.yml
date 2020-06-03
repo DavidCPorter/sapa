@@ -1,0 +1,7 @@
+---
+
+_index_es:
+  - install_py_dep
+  - download_json
+  - do_index
+

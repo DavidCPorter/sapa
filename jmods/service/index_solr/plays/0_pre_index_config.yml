@@ -1,0 +1,22 @@
+---
+# solrconfig.xml is index-specific so it should be part of index module rather than solr module
+
+# IMPORTANT, this pre_index step is to modify any parts of the index-related config options **that cannot** be modified after index step.
+# config options required pre index are things like https://lucene.apache.org/solr/guide/8_4/config-api.html#what-about-updaterequestprocessorchain
+
+# Recent solr versions have enabled post-index config updates for things like caches etc.... https://lucene.apache.org/solr/guide/8_4/config-api.html#commands-to-modify-the-config
+
+- name: copy solrconfig to nodes
+  template:
+    src: "{{module_root}}/templates/solrconfig.xml"
+    dest: "{{solrconfig_xml_dest}}"
+  tags:
+    - activate
+
+
+- name: deactivating solrconfig options by replacing solrconfig.xml with default_solrconfig.xml
+  copy:
+    src: "{{module_root}}/files/default_solrconfig.xml"
+    dest: "{{solrconfig_xml_dest}}"
+  tags:
+    - activate

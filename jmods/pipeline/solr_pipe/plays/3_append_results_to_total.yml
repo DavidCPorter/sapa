@@ -1,0 +1,14 @@
+---
+
+
+- debug:
+    msg: python3 generate_exp_csvs.py --exp_name {{experiment_name}} --JANUS_HOME {{JANUS_HOME}} --deploy_name {{deploy_name}} --shards {{shards}} --replicas {{replicas}} --query {{query}} --clustersize {{solrnum}} --engine {{engine}}
+  tags:
+    - activate
+
+- name: append results to csv
+  command: python3 generate_exp_csvs.py --exp_name {{experiment_name}} --JANUS_HOME {{JANUS_HOME}} --deploy_name {{deploy_name}} --shards {{shards}} --replicas {{replicas}} --query {{query}} --clustersize {{solrnum}} --engine {{engine}}
+  args:
+    chdir: "{{module_root}}/files"
+  tags:
+    - activate

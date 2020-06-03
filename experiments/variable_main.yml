@@ -1,0 +1,32 @@
+
+- hosts: "{{hosts_ui}}"
+
+  vars:
+    JANUS_HOME: /Users/dporter/projects/janus
+    home: /users/dporte7
+    module_root: "{{JANUS_HOME}}/jmods/{{stage}}/{{module}}"
+    user_root_dir: "{{home}}"
+
+  gather_facts: no
+
+  tasks:
+
+    - name: include user variables
+      include_vars: "{{branch_path}}/user_variables.yml"
+      tags:
+        - always
+
+    - name: including default variables
+      include_vars: '{{module_root}}/defaults/defaults.yml'
+      tags:
+        - always
+
+    - name: Print vars
+      vars:
+        msg: |
+          Module Variables ("vars"):
+          --------------------------------
+          {{ vars | to_nice_json }}
+
+      debug:
+        msg: "{{ msg.split('\n') }}"

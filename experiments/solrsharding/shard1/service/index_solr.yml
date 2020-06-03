@@ -1,0 +1,9 @@
+aws_dir: dporter
+aws_dir_name: 172.21.0.3/reviews_rf2_s1_clustersizetwoNode
+collection_name: 1_2_index
+index_solr: ['0_pre_index_config', '1_index', '2_solr_aws', '3_post_index_config']
+nfs_root: /proj/uic-cs-edu-PG0/exp/solr8/datastore
+replicas: 2
+shards: 1
+shorter_data: yes
+upload_data_file_path: /Users/dporter/projects/janus/playbooks/roles/upload_data/files

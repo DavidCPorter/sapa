@@ -1,0 +1,6 @@
+- name: install elastic client
+  pip:
+    name: elasticsearch>=6.0.0,<7.0.0
+    executable: pip3
+  tags:
+    - pipelastic

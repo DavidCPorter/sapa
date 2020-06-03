@@ -1,0 +1,85 @@
+---
+#SECTIONS OF THIS PLAY:
+# activate
+# check activate
+# deactivate
+
+
+#### ACTIVATE ####
+- name: ZOO ---> make sure clean slate
+  block:
+    - name: ZOO ---> rm previous zoo install
+      file:
+        path: "{{zoo_root_dir}}"
+        state: absent
+      ignore_errors: yes
+
+    - name: ZOO ---> rm tmp
+      file:
+        path: '{{zoo_install_dir}}/tmp'
+        state: absent
+      ignore_errors: yes
+
+    - name: ZOO ---> mkdir tmp
+      file:
+        path: '{{zoo_install_dir}}/tmp'
+        state: directory
+      ignore_errors: yes
+
+  tags:
+    - activate
+
+- name: ZOO ---> Download and unpack zookeeper
+  unarchive:
+    remote_src: yes
+    src: "{{zoo_version_download_dict[zoo_version]}}"
+    dest: '{{zoo_install_dir}}/tmp'
+  tags:
+    - activate
+
+- name: ZOO ---> get name of dir
+  shell: ls tmp | grep "{{zoo_version}}"
+  register: _zoodir
+  tags:
+    - activate
+
+- name: ZOO ---> mv dir
+  copy:
+    remote_src: yes
+    src: "{{zoo_install_dir}}/tmp/{{_zoodir['stdout']}}/."
+    dest: "{{zoo_root_dir}}"
+  tags:
+    - activate
+
+- name: ZOO ---> rm tmp
+  file:
+    path: '{{zoo_install_dir}}/tmp'
+    state: absent
+  ignore_errors: yes
+  tags:
+    - activate
+
+
+#### CHECK ACTIVATED ####
+- name: ZOO ---> Check Zookeeper Download Success
+  stat:
+    path: "{{zoo_bin_dir}}"
+  register: checkpoint
+  failed_when: checkpoint.stat.isdir is not defined
+  tags:
+    - activate
+
+
+#### DEACTIVATE ####
+- name: ZOO ---> deactivate zoo download_task.yml by removing directory
+  file:
+    path: "{{zoo_root_dir}}"
+    state: absent
+  tags:
+    - deactivate
+
+- name: ZOO ---> rm tmp
+  file:
+    path: '{{zoo_install_dir}}/tmp'
+    state: absent
+  ignore_errors: yes

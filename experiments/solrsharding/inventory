@@ -1,0 +1,64 @@
+[allNodes]
+janus0   globalIP=172.21.0.2   ansible_subnet=172.21.0.2  zoo_id=1
+janus1   globalIP=172.21.0.3   ansible_subnet=172.21.0.3  zoo_id=2
+janus2   globalIP=172.21.0.4   ansible_subnet=172.21.0.4  zoo_id=3
+janus3   globalIP=172.21.0.5   ansible_subnet=172.21.0.5
+janus4   globalIP=172.21.0.6   ansible_subnet=172.21.0.6
+janus5   globalIP=172.21.0.7   ansible_subnet=172.21.0.7
+
+[zookeeperNodes]
+janus0   globalIP=172.21.0.2   ansible_subnet=172.21.0.2  zoo_id=1
+janus1   globalIP=172.21.0.3   ansible_subnet=172.21.0.3  zoo_id=2
+janus2   globalIP=172.21.0.4   ansible_subnet=172.21.0.4  zoo_id=3
+
+[masterNodes]
+janus0   globalIP=172.21.0.2   ansible_subnet=172.21.0.2  zoo_id=1
+janus1   globalIP=172.21.0.3   ansible_subnet=172.21.0.3  zoo_id=2
+
+[thirdMaster]
+janus2   globalIP=172.21.0.4   ansible_subnet=172.21.0.4  zoo_id=3
+
+
+[twoNode]
+janus0   globalIP=172.21.0.2   ansible_subnet=172.21.0.2  zoo_id=1
+janus1   globalIP=172.21.0.3   ansible_subnet=172.21.0.3  zoo_id=2
+
+[dataNodes]
+janus0   globalIP=172.21.0.2   ansible_subnet=172.21.0.2  zoo_id=1
+janus1   globalIP=172.21.0.3   ansible_subnet=172.21.0.3  zoo_id=2
+janus2   globalIP=172.21.0.4   ansible_subnet=172.21.0.4  zoo_id=3
+
+
+
+[singleNode]
+janus0   globalIP=172.21.0.2   ansible_subnet=172.21.0.2  zoo_id=1
+
+[singleGenerator]
+janus3   globalIP=172.21.0.5   ansible_subnet=172.21.0.5
+
+[generatorNode]
+janus3   globalIP=172.21.0.5   ansible_subnet=172.21.0.5
+janus4   globalIP=172.21.0.6   ansible_subnet=172.21.0.6
+janus5   globalIP=172.21.0.7   ansible_subnet=172.21.0.7
+
+[all:vars]
+ansible_user=janususer
+local_user=dporter
+
+ansible_sudo_pass=password
+ansible_connection=ssh
+ansible_password=password
+node0=172.21.0.2
+node1=172.21.0.3
+node2=172.21.0.4
+node3=172.21.0.5
+node4=172.21.0.6
+node5=172.21.0.7
+root_path=/Users/dporter/projects/janus
+main_class=com.dporte7.solrclientserver.DistributedWebServer
+git_branch_name=dporter_8_3
+s3_bucket_name=solr-8-3-dporter
+gather_facts=no
+home=/home/janususer
+JANUS_HOME=/Users/dporter/projects/janus
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'

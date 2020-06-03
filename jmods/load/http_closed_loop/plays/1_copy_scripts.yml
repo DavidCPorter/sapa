@@ -1,0 +1,18 @@
+---
+- name: make traffic_gen dir
+  file:
+    path: "{{home}}/traffic_gen"
+    state: directory
+
+  tags:
+    - activate
+
+
+- name: LOAD TASK---> copy load scripts to traffic_gen
+  copy:
+    src: "{{http_closed_scripts_dir}}/{{item}}"
+    dest: "{{home}}/traffic_gen/{{item}}"
+  with_items: "{{load_files}}"
+  tags:
+    - activate
+

@@ -1,0 +1,88 @@
+---
+
+#{{solr_heap}}
+
+- name: SOLR ---> copy solr init file to hosts
+  template:
+    src: "{{solr_init_file}}"
+    dest: '{{solr_install_dir}}/solr/bin/solr.in.sh'
+  tags:
+    - activate
+
+- name: SOLR ---> create and grant log dir permissions for solr
+  file:
+    path: "{{solr_log_dir}}"
+    state: directory
+    mode: "777"
+    recurse: yes
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+
+
+- name: SOLR ---> replace solrconfig.xml with local default copy
+  copy:
+    src:  '{{module_root}}/files/solrconfig_default.xml'
+    dest: '{{solr_install_dir}}/solr/server/solr/configsets/_default/conf/solrconfig.xml'
+  tags:
+    - activate
+
+- name: SOLR ---> replace solr.xml with local copy
+  copy:
+    src: '{{module_root}}/files/solr_default.xml'
+    dest: '{{solr_install_dir}}/solr/server/solr/solr.xml'
+  tags:
+    - activate
+
+- name: set singleNode chroot for znodes for all solr node configs
+  shell: bash "{{solr_bin_exec}}" zk mkroot "{{item}}"
+  ignore_errors: yes
+  run_once: yes
+  with_items:
+    - /singleNode
+    - /twoNode
+    - /fourNode
+    - /eightNode
+    - /sixteenNode
+    - /default
+  tags:
+    - activate
+
+#- name: SOLR ---> modify solr executable ~/solr-8_3/solr/bin/solr
+#  lineinfile:
+#    path: '{{solr_install_dir}}/solr/bin/solr'
+#    regex: '^REMOTE_JMX_OPTS+=("-Djava.rmi.server.hostname=$SOLR_HOST")'
+#    line: 'REMOTE_JMX_OPTS+=("-Djava.rmi.server.hostname={{globalIP}}")'
+#  tags:
+#    - activate
+
+- debug:
+    msg: "{{chroot}}"
+  tags:
+    - activate
+
+
+
+
+    # - name: SOLR ---> add slow query logging for queries > .5s to default solrconfig.xml
+    #   lineinfile:
+    #     path: '{{solr_install_dir}}/solr/server/solr/configsets/_default/conf/solrconfig.xml'
+    #     insertbefore: '</query>'
+    #     line: '<slowQueryThresholdMillis>500</slowQueryThresholdMillis>'
+    #   tags:
+    #     - slow_query
+    #     # - setup
+    # #  decided to completely disable logging for experiments.
+    # - name: SOLR ---> rm slow query logging for queries > .5s to default solrconfig.xml
+    #   lineinfile:
+    #     path: '{{solr_install_dir}}/solr/server/solr/configsets/_default/conf/solrconfig.xml'
+    #     state: absent
+    #     regex: '<slowQueryThresholdMillis>500</slowQueryThresholdMillis>'
+    #   tags:
+    #     - remove_slow_query
+    # - setup
+
+
+#### DEACTIVATE ####

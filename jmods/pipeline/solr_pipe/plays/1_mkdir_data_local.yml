@@ -1,0 +1,21 @@
+---
+- name: mkdir for {{janus_name}} result data
+  file:
+    path: "{{local_data_dir}}/{{experiment_name}}"
+    state: directory
+    mode: '777'
+
+  tags:
+    - activate
+
+
+- name: mkdir for this branches data
+  file:
+    path: "{{local_data_dir}}/{{experiment_name}}/{{deploy_name}}"
+    state: directory
+    mode: '777'
+
+  tags:
+    - activate
+
+

@@ -1,0 +1,55 @@
+---
+# tasks file for upload_data
+- name: include the vars
+  include_vars: "{{JANUS_HOME}}/playbooks/roles/upload_data/defaults/main.yml"
+
+- name: check if aws has the index
+# aws s3 ls s3://solr-8-dporter/10.10.1.12/reviews_rf32_s1_clustersize12
+  shell: aws s3 ls "s3://tard/default"
+  register: index_result
+  ignore_errors: yes
+
+- name: post "{{solr_home}}" dir to AWS
+  shell: aws s3 sync . "s3://tard/{{ansible_subnet}}/{{collection_name}}"
+  ignore_errors: yes
+  no_log: True
+  args:
+    chdir: '{{solr_home}}'
+  when: "'PRE' not in index_result.stdout"
+
+- name: post node__1 dir to AWS
+  shell: aws s3 sync . "s3://tard/{{ansible_subnet}}/{{collection_name}}/node__1"
+  ignore_errors: yes
+  no_log: True
+  args:
+    chdir: "{{data_upload_dir}}/node__1"
+  when: "'PRE' not in index_result.stdout"
+
+
+- name: post node__2 dir to AWS
+  shell: aws s3 sync . "s3://tard/{{ansible_subnet}}/{{collection_name}}/node__2"
+  ignore_errors: yes
+  no_log: True
+  args:
+    chdir: "{{data_upload_dir}}/node__2"
+  when: "'PRE' not in index_result.stdout"
+
+- name: post node__3 dir to AWS
+  shell: aws s3 sync . "s3://tard/{{ansible_subnet}}/{{collection_name}}/node__3"
+  ignore_errors: yes
+  no_log: True
+  args:
+    chdir: "{{data_upload_dir}}/node__3"
+  when: "'PRE' not in index_result.stdout"
+
+
+- name: rm cores from nodes
+  shell: rm -rf reviews*
+  args:
+    chdir: '{{solr_home}}'
+  tags:
+    - rm_cores
+- name: rm cores from node__ dirs
+  shell: rm -rf node__*
+  tags:
+    - rm_cores

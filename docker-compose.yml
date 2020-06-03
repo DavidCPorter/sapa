@@ -1,0 +1,128 @@
+version: '3'
+services:
+  janusserver1:
+    container_name: janusUbuntu1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2999:22"
+      - "9922:9200"
+      - "8982:8983"
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2000M
+        reservations:
+          cpus: '1'
+          memory: 2000M
+
+    networks:
+      janus_net:
+        ipv4_address: 172.21.0.2
+
+  janusserver2:
+    container_name: janusUbuntu2
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2888:22"
+      - "9933:9200"
+      - "8983:8983"
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2000M
+        reservations:
+          cpus: '1'
+          memory: 2000M
+    networks:
+      janus_net:
+        ipv4_address: 172.21.0.3
+
+
+#server 3 is only used for synchronization aka masternode not datanode
+  janusserver3:
+    container_name: janusUbuntu3
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2777:22"
+      - "9944:9200"
+      - "8984:8983"
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 400M
+        reservations:
+          cpus: '1'
+          memory: 400M
+    networks:
+      janus_net:
+        ipv4_address: 172.21.0.4
+
+  janusserver4:
+    container_name: janusWorkhorse
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2666:22"
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 200M
+    networks:
+      janus_net:
+        ipv4_address: 172.21.0.5
+
+  janusserver5:
+    container_name: janusWorkhorse2
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2667:22"
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 200M
+    networks:
+      janus_net:
+        ipv4_address: 172.21.0.6
+
+  janusserver6:
+    container_name: janusWorkhorse3
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2668:22"
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 200M
+    networks:
+      janus_net:
+        ipv4_address: 172.21.0.7
+
+networks:
+  janus_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/24

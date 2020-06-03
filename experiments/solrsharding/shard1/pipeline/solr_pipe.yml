@@ -1,0 +1,6 @@
+csv_location: /home/janususer/traffic_gen
+deploy_name: shard1
+duration: 10
+local_data_dir: /Users/dporter/projects/janus/data_dir
+output_dir: /home/janususer/traffic_gen
+result_filename: rf2_s1__clustersize2::query=roundrobin::proc=4::threads=1::dur=10.csv

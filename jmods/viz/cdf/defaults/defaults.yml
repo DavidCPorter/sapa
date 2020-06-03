@@ -1,0 +1,7 @@
+---
+
+local_data_dir: "{{JANUS_HOME}}/data_dir"
+chart_type: cdf
+
+_cdf:
+  - generate_cdf

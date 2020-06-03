@@ -1,0 +1,26 @@
+---
+# defaults file for solr
+
+# VARIABLE PRECEDENCE
+# If multiple variables of the same name are defined in different places, they win in a certain order, which is:
+# extra vars (-e in the command line) always win
+# then comes connection variables defined in local_var_inventory (ansible_ssh_user, etc)
+# then comes "most everything else" (command line switches, vars in play, included vars, role vars, etc)
+# then comes the rest of the variables defined in local_var_inventory
+# then comes facts discovered about a system
+# then "role defaults", which are the most "defaulty" and lose in priority to everything.
+
+# Files & Paths
+
+solr_version: dporter_8_3
+solr_install_dir: "{{home}}/solr-{{solr_version}}"
+solr_log_dir: "/var/solr/logs"
+solr_git_branch_name: "{{solr_version}}"
+solr_home: "{{solr_install_dir}}/solr/server/solr"
+solr_init_file: '{{module_root}}/templates/solr.in.sh'
+solr_log4j_props: "{{solr_install_dir}}/solr/server/resources/log4j2.xml"
+solr_heap: 1 #GB
+solr_repo: https://github.com/DavidCPorter/lucene-solr.git
+solr_bin_exec: "{{solr_install_dir}}/solr/bin/solr"
+chroot: "{{hosts_ui}}"
+solrconfig_xml_dest: "{{solr_home}}/configsets/_default/conf/solrconfig.xml"

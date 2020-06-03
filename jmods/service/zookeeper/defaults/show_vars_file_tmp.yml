@@ -1,0 +1,7 @@
+zoo_bin_dir: {{zoo_bin_dir}}
+zoo_conf_dir: {{zoo_conf_dir}}
+zoo_download_link: {{zoo_download_link}}
+zoo_install_dir: {{zoo_install_dir}}
+zoo_root_dir: {{zoo_root_dir}}
+zoo_version: {{zoo_version}}
+zoo_version_download_dict: {{zoo_version_download_dict}}

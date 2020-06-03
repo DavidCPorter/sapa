@@ -1,0 +1,69 @@
+---
+#SECTIONS OF THIS PLAY:
+  # activate
+  # check activate
+  # deactivate
+
+
+
+#### ACTIVATE ####
+
+- name: CLOUD-ENV ---> raise file and proc limits on servers
+  blockinfile:
+    path: '/etc/security/limits.conf'
+    block: |
+      {{ansible_user}}       soft    nproc           65555
+      {{ansible_user}}       hard    nproc           65555
+      {{ansible_user}}       soft    nofile          65555
+      {{ansible_user}}       hard    nofile          65555
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+- name: CLOUD-ENV ---> update packages
+  apt:
+    update_cache: yes
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+- name: CLOUD-ENV ---> ensure jdk8 is installed
+  apt:
+    name: openjdk-8-jdk
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+
+- name: CLOUD-ENV ---> sudo apt-get install packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update-cache: yes
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+
+
+#### CHECK ACTIVATE ####
+
+- name: CLOUD-ENV ---> verifying activated
+  shell: echo "no check tasks"
+  delegate_to: localhost
+  tags:
+    - activate
+
+
+#### DEACTIVATE ####
+
+- name: CLOUD-ENV ---> deactivate
+  shell: echo "no deactivate tasks"
+  delegate_to: localhost
+  tags:
+    - deactivate
+

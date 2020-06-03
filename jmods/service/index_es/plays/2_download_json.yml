@@ -1,0 +1,19 @@
+# tasks file for upload_data
+- name: Check if data has been downloaded already.
+  stat:
+    path: "{{home}}/reviews_Electronics_5.json"
+  register: data_download_path_status
+
+- name: download data
+  shell: wget http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Electronics_5.json.gz
+  args:
+    creates: "{{home}}/reviews_Electronics_5.json.gz"
+  when:
+    - data_download_path_status.stat.exists == False
+
+- name: unzip data
+  shell: gunzip -f "{{data_upload_dir}}/reviews_Electronics_5.json.gz"
+  args:
+    creates: '{{data_upload_dir}}/reviews_Electronics_5.json'
+  when:
+    - data_download_path_status.stat.exists == False

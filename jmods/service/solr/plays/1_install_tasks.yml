@@ -1,0 +1,62 @@
+---
+#### ACTIVATE ####
+# {{solr_version}}
+
+
+- name: SOLR ---> Check if Solr has been installed already.
+  stat:
+    path: "{{solr_install_dir}}/solr/server/start.jar"
+  register: solr_install_path_status
+  tags:
+    - activate
+
+- name: SOLR ---> Download Solr to -> solr_install_dir
+  git:
+    repo: "{{solr_repo}}"
+    dest: "{{solr_install_dir}}"
+    version: "{{solr_git_branch_name}}"
+    force: yes
+  register: solr_git_status
+  when: solr_install_path_status.stat.exists == False
+  tags:
+    - activate
+
+- name: SOLR ---> Run ant-ivy.
+  shell: ant ivy-bootstrap
+  args:
+    chdir: "{{solr_install_dir}}"
+  tags:
+    - activate
+
+- name: SOLR ---> Build solr with ant.
+  shell: ant compile
+  args:
+    chdir: '{{solr_install_dir}}'
+    creates: "{{solr_install_dir}}/lucene/build/core/MANIFEST.MF"
+  tags:
+    - activate
+
+- name: SOLR ---> run ant server
+  shell: ant server
+  args:
+    chdir: '{{solr_install_dir}}/solr'
+#    creates: "{{solr_install_dir}}/lucene/build/core/MANIFEST.MF"
+  tags:
+    - activate
+
+
+
+#### DEACTIVATE #####
+
+
+- name: SOLR ---> deactivate solr install
+  file:
+    path: "{{solr_install_dir}}"
+    state: absent
+  tags:
+    - deactivate
+
+
+
+
+

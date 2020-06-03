@@ -1,0 +1,12 @@
+chroot: {{chroot}}
+solr_bin_exec: {{solr_bin_exec}}
+solr_git_branch_name: {{solr_git_branch_name}}
+solr_heap: {{solr_heap}}
+solr_home: {{solr_home}}
+solr_init_file: {{solr_init_file}}
+solr_install_dir: {{solr_install_dir}}
+solr_log4j_props: {{solr_log4j_props}}
+solr_log_dir: {{solr_log_dir}}
+solr_repo: {{solr_repo}}
+solr_version: {{solr_version}}
+solrconfig_xml_dest: {{solrconfig_xml_dest}}

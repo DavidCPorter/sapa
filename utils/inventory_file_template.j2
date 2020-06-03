@@ -1,0 +1,52 @@
+[allNodes]
+{% for host in nodes_dict.values()%}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[zookeeperNodes]
+{% for host in zoo_list %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[masterNodes]
+{% for host in zoo_list %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[thirdMaster]
+{% for host in thirdMaster %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[twoNode]
+{% for host in twoNode %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[fourNode]
+{% for host in fourNode %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[eightNode]
+{% for host in eightNode %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[sixteenNode]
+{% for host in sixteenNode %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[twentyfourNode]
+{% for host in twentyfourNode %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+[singleNode]
+{% for host in singleNode %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+
+[generatorNode]
+{% for host in load_dict.values() %}{{host}}{% if not loop.last %}{% endif %}{% endfor %}
+
+
+[dataServer]
+{{ nodes_dict['3'] }}
+
+[mylocal]
+localhost ansible_connection=local
+
+
+[all:vars]
+ansible_connection=ssh
+ansible_user={{host_user}}
+{% for key, value in nodes_dict.items() %}node{{key}}={{nodes_dict[key][:15]}}
+{% if not loop.last %}{% endif %}{% endfor %}
+JANUS_HOME=/Users/dporter/projects/janus
+home=/users/dporte7
+main_class=com.dporte7.solrclientserver.DistributedWebServer
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+gather_facts=no

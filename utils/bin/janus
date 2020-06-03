@@ -1,0 +1,62 @@
+#!/bin/bash
+source $JANUS_HOME/utils/janusutils.sh
+#echo $JANUS_HOME
+
+elementIn () {
+  local e match="$1"
+  shift
+  for e; do [[ "$e" == "$match" ]] && return 0; done
+  return 1
+}
+
+createModule(){
+  if [ "$#" -ne 2 ]; then
+    # shellcheck disable=SC1065
+    printf "\n > janus create requires 2 parameters: stage, module_name \n"
+    exit
+  fi
+
+  MOD_LOC=$JANUS_HOME/jmods/$1/$2
+  mkdir $MOD_LOC
+  cd $MOD_LOC;mkdir plays defaults tests files templates
+  touch defaults/main.yml tests/main.yml janus_example_search.md
+  printf "\nMODULE $2 created here: $MOD_LOC \n\n"
+}
+
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: janus [command] [parameters]"
+	exit
+fi
+
+MODULE='x'
+JANUS_HOME=/Users/dporter/projects/janus
+while (( "$#" )); do
+  case "$1" in
+    create|c)
+      COMMAND='create'
+      STAGE="$2"
+      MODULE="$3"
+      shift $#
+      createModule $STAGE $MODULE
+      ;;
+    * )
+      COMMAND=$1
+      ARGS="$@"
+      ARGS="$ARGS --home $JANUS_HOME"
+      exp_dir_list=$(ls ${JANUS_HOME}/experiments)
+      exp_array=($(echo $exp_dir_list))
+      if elementIn $COMMAND "${exp_array[@]}"; then
+        python3 $JANUS_HOME/utils/bin/interactive_exp.py --name $COMMAND --home $JANUS_HOME --home_user $USER || echo "failed to successfully complete JANUS session"
+        echo "*** COMPLETED INTERACTIVE JANUS SESSION *****"
+        exit
+      fi
+      #for non interactive commands
+      python3 $JANUS_HOME/utils/bin/$COMMAND.py $ARGS || echo "> janus $ARGS is not a valid command. Please be sure to follow API parameter rules"
+      shift "$#"
+      ;;
+
+  esac
+done
+
+exit

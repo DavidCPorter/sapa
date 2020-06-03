@@ -1,0 +1,5 @@
+cred_dir: {{cred_dir}}
+packages: {{packages}}
+ptp_install_dir: {{ptp_install_dir}}
+ramdisk_path: {{ramdisk_path}}
+rem_user: {{rem_user}}

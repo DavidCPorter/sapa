@@ -1,0 +1,87 @@
+# 32 shards and 3 copies
+---
+#- name: check if aws has the index
+#  # aws s3 ls s3://solr-8-dporter/10.10.1.12/reviews_rf32_s1_clustersize12
+#  shell: aws s3 ls "s3://{{aws_dir}}/{{ansible_subnet}}/{{collection_name}}"
+#  register: index_result
+#  ignore_errors: yes
+#  tags:
+#    - activate
+
+
+# why not just delete always before creating in case a dangler exists
+- name: DELETE collection when we have a dangling collection
+  shell: ./bin/solr delete -c "{{collection_name}}"
+  args:
+    chdir: '{{solr_install_dir}}/solr'
+  ignore_errors: yes
+  # when:
+#  when: "'PRE' not in index_result.stdout"
+  tags:
+    - activate
+
+- name: create collection {{collection_name}}
+  shell: ./bin/solr create_collection -c {{collection_name}} -s {{shards}} -rf {{replicas}} -d _default -force
+  register: col_result
+  args:
+    chdir: '{{solr_install_dir}}/solr'
+    creates: '{{data_upload_dir}}/{{collection_name}}.txt'
+  ignore_errors: yes
+#  when: "'PRE' not in index_result.stdout"
+  tags:
+    - activate
+
+- debug:
+    var: shorter_data
+  tags:
+    - activate
+
+- debug:
+    msg: "shorter_data -> {{shorter_data}}"
+  tags:
+    - activate
+
+- name: try create collection {{collection_name}} AGAIN if failed
+  shell: ./bin/solr create_collection -c {{collection_name}} -s {{shards}} -rf {{replicas}} -d _default -force
+  register: col_result
+  args:
+    chdir: '{{solr_install_dir}}/solr'
+    creates: '{{data_upload_dir}}/{{collection_name}}.txt'
+  ignore_errors: yes
+  when: col_result.changed != true
+  tags:
+    - activate
+
+
+- name: create schema
+  script: "{{module_root}}/files/schema_create.sh {{ansible_subnet}} {{collection_name}}"
+#  when: "'PRE' not in index_result.stdout"
+#  run_once: true # dont need
+  tags:
+    - activate
+
+- name: truncate json when shorter_data flag is true
+  shell: head -n 100000 reviews_Electronics_5.json > shorter_reviews.json
+  when: "shorter_data == 'yes'"
+  tags:
+    - activate
+
+- name: post data
+  shell: ./bin/post -c {{collection_name}} {{data_upload_dir}}/shorter_reviews.json
+  args:
+    chdir: '{{solr_install_dir}}/solr'
+  when:
+#  - "'PRE' not in index_result.stdout"
+  - "shorter_data == 'yes'"
+  tags:
+    - activate
+
+- name: post data
+  shell: ./bin/post -c "{{collection_name}}" "{{data_upload_dir}}/reviews_Electronics_5.json"
+  args:
+    chdir: '{{solr_install_dir}}/solr'
+  when:
+#  - "'PRE' not in index_result.stdout"
+  - "shorter_data != 'yes'"
+  tags:
+    - activate

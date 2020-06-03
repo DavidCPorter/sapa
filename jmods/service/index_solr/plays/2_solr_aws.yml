@@ -1,0 +1,57 @@
+---
+
+#- name: check if aws has the index
+#  # aws s3 ls s3://solr-8-dporter/10.10.1.12/reviews_rf32_s1_clustersize12
+#  shell: aws s3 ls "s3://{{aws_dir}}/{{ansible_subnet}}/{{collection_name}}"
+#  register: index_result
+#  ignore_errors: yes
+#  tags:
+#    - activate
+#    - deactivate
+#
+#
+#- name: pull AWS index
+#  shell: aws s3 sync "s3://{{aws_dir}}/{{ansible_subnet}}/{{collection_name}}" .
+#  ignore_errors: yes
+#  no_log: True
+#  args:
+#    chdir: '{{solr_home}}'
+#  when: "'PRE' in index_result.stdout"
+#  tags:
+#    - activate
+
+### CHECK ###
+  #should be something here about checking the solr_home dir for collection using ls
+#- name: pull AWS index
+#  shell: ls . | grep {{collection_name}}"
+#  delegate_to: "{{node0}}"
+#  run_once: true
+#  register: check_output
+#  args:
+#    chdir: '{{solr_home}}'
+#  when: "PRE' in index_result.stdout"
+#  failed_when: check_output.rc == 2
+#  tags:
+#    - activate
+
+
+
+#### DEACTIVATE ####
+
+
+#- name: post dir to AWS
+#  shell: aws s3 sync . "s3://{{aws_dir}}/{{ansible_subnet}}/{{collection_name}}"
+#  ignore_errors: yes
+#  no_log: True
+#  args:
+#    chdir: '{{solr_home}}'
+#  when: "'PRE' not in index_result.stdout"
+#  tags:
+#    - deactivate
+
+#- name: rm cores from nodes
+#  shell: rm -rf reviews*
+#  args:
+#    chdir: '{{solr_home}}'
+#  tags:
+#    - deactivate

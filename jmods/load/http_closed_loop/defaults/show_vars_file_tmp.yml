@@ -1,0 +1,14 @@
+endpoint_host: {{endpoint_host}}
+endpoint_port: {{endpoint_port}}
+engine: {{engine}}
+http_closed_scripts_dir: {{http_closed_scripts_dir}}
+instances: {{instances}}
+l_docker: {{l_docker}}
+load_duration: {{load_duration}}
+load_files: {{load_files}}
+loop_type: {{loop_type}}
+processes: {{processes}}
+procs: {{procs}}
+query: {{query}}
+solrnum: {{solrnum}}
+threads: {{threads}}

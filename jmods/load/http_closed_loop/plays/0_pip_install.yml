@@ -1,0 +1,5 @@
+
+- name: install numpy
+  shell: pip3 install numpy
+  tags:
+    - activate

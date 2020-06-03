@@ -1,0 +1,28 @@
+---
+
+- name: do read results and delete csvs if successful
+
+  block:
+    - name: run read results remotely and output to single remote file
+      script:
+        cmd: "{{module_root}}/files/readresults.py --processes {{processes}} --threads {{threads}} --duration {{duration}} --replicas {{replicas}} --query {{query}} --loop {{loop_type}} --shards {{shards}} --solrnum {{solrnum}} --instances {{instances}} --engine {{engine}} --csv_location {{csv_location}} --result_filename {{result_filename}}"
+        creates: "{{output_dir}}/readresults_dir/{{result_filename}}"
+        executable: python3
+
+    - name: retrieve the readresults_output
+      fetch:
+        src: "{{output_dir}}/readresults_dir/{{result_filename}}"
+        dest: "{{local_data_dir}}/{{experiment_name}}/{{deploy_name}}/{{inventory_hostname}}{{result_filename}}"
+        flat: yes
+
+    - name: remove csvs for this branch exp
+      shell: rm *.csv
+      args:
+        chdir: "{{output_dir}}"
+
+
+  tags:
+    - activate
+
+
+

@@ -1,0 +1,81 @@
+---
+
+#### ACTIVATE ####
+
+- name: ELASTIC --> append elastic configs to config
+  block:
+    - name: elasticsearch.yml
+      template:
+        src: '{{module_root}}/templates/elasticsearch.yml'
+        dest: "{{es_root_dir}}/config"
+      vars:
+        cache_of_heap: "{{cache_percentage_of_heap}}"
+        clustername: "{{cluster_name}}"
+        nodename: "{{globalIP}}"
+        pathdata: "{{es_data_dir}}"
+        pathlogs: "{{es_log_dir}}"
+        masters: "{{masters_override}}"
+        nethost: "{{ansible_subnet}}"
+        discoverynodes: "{{discovery_nodes}}"
+
+    - name: log4j2.properties
+      template:
+        src: '{{module_root}}/log4j2.properties'
+        dest: "{{es_root_dir}}/config"
+      vars:
+        root_log: warn
+
+    - name: jvm.options
+      template:
+        src: '{{module_root}}/jvm.options'
+        dest: "{{es_root_dir}}/config"
+
+  tags:
+    - activate
+
+- name: ELASTIC --> start elastic
+  block:
+    - name: start elastic w/ a pointer to config path
+      shell: ./bin/elasticsearch >/dev/null 2>&1 &
+      async: 9999
+      poll: 5
+      register: es_start_result
+      args:
+        chdir: '{{es_root_dir}}'
+      environment:
+        ES_PATH_CONF: "{{es_root_dir}}/config"
+        # ignore_errors: yes
+
+
+    - name: wait for port 9200 to open
+      wait_for:
+        host: "{{ansible_subnet}}"
+        port: 9200
+        state: started
+        delay: 5
+      when: " 'thirdMaster' not in group_names "
+  tags:
+    - activate
+
+# - name: fail ansible if elastic didn't launch
+#   fail:
+#     msg: "elastic search returned nonzero -- failed"
+#   when:
+#     - es_start_result.rc != 0
+#   tags:
+#     - start
+#     - never
+
+
+#### DEACTIVATE ####
+
+
+- name: ELASTIC ----> stop elastic (ignore error)
+  shell: jps | awk '/Elastic/{printf($1)}' | xargs kill
+  ignore_errors: yes
+  args:
+    chdir: '{{es_root_dir}}'
+  tags:
+    - deactivate
+
+

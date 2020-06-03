@@ -1,0 +1,8 @@
+---
+- hosts: twoNode
+  tasks:
+    - name:
+      shell: ls . | grep mucha
+      register: result
+    - debug:
+        var: result

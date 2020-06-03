@@ -1,0 +1,77 @@
+---
+
+#### ACTIVATE ####
+
+- name: SOLR ---> start solr
+  shell: ./solr/bin/solr start -c -q -z "{{node0}}:2181,{{node1}}:2181,{{node2}}:2181/{{chroot}}"
+  register: solr_start_result
+  ignore_errors: yes
+
+  args:
+    chdir: '{{solr_install_dir}}'
+
+  tags:
+    - activate
+    - start
+
+
+- name: SOLR ---> fail the start solr if conditions not met
+  fail:
+    msg: "the command failed"
+  when:
+    - solr_start_result.rc != 0
+    - "'Port 8983 is already being used by another process' not in solr_start_result.stdout"
+  tags:
+    - activate
+
+
+
+
+
+
+#### DEACTIVATE ####
+
+- block:
+
+  - name: SOLR ---> stop solr
+    shell: ./solr/bin/solr stop -c -all
+    register: solr_stop_result
+    ignore_errors: yes
+    args:
+      chdir: '{{solr_install_dir}}'
+
+
+  - name: SOLR ---> fail the play if the previous command did not succeed
+    fail:
+      msg: "the command failed"
+    when:
+      - solr_stop_result.rc != 0
+      - '"No process found" not in solr_stop_result.stdout'
+
+  tags:
+    - deactivate
+
+
+
+# UTILITIES
+
+- name: SOLR ---> stop Solr
+  shell: ./solr/bin/solr stop
+  register: solr_stop_result
+  ignore_errors: yes
+  args:
+    chdir: '{{solr_install_dir}}'
+
+  tags:
+    - solr_stop
+
+- name: SOLR ---> start solr
+  shell: ./solr/bin/solr start -c -q -z "{{node0}}:2181,{{node1}}:2181,{{node2}}:2181/{{chroot}}"
+  register: solr_start_result
+  ignore_errors: yes
+
+  args:
+    chdir: '{{solr_install_dir}}'
+
+  tags:
+    - solr_start

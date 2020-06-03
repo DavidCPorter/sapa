@@ -1,0 +1,13 @@
+---
+
+- debug:
+    msg: python3 generate_figures.py --home_path {{JANUS_HOME}} --experiment_name {{experiment_name}} --query tmp --chart_type {{chart_type}} --module_root {{module_root}}
+  tags:
+    - activate
+
+- name: generate cdf viz
+  command: python3 generate_figures.py --home_path {{JANUS_HOME}} --experiment_name {{experiment_name}} --query tmp --chart_type {{chart_type}} --module_root {{module_root}}
+  args:
+    chdir: "{{module_root}}/files"
+  tags:
+    - activate

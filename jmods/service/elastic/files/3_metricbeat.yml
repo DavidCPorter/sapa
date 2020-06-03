@@ -1,0 +1,50 @@
+
+- name: check if metric has been downloaded
+  stat:
+    path: "{{metric_root_dir}}"
+  register: met
+  tags:
+    - met
+    - setup
+    - never
+
+
+- name: Download and unpack metric
+  block:
+    - name: create met dir
+      file:
+        path: "{{metric_root_dir}}"
+        state: directory
+    - name: download and unarchive
+      unarchive:
+        src: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.5.2-linux-x86_64.tar.gz
+        dest: "{{metric_root_dir}}"
+        remote_src: yes
+
+  # when: met.stat.isdir is not defined
+  tags:
+    - met
+    - setup
+    - never
+
+
+#use discovery_nodes var for elasticsearch.hosts param
+- name: update metric config
+  template:
+    src: metric.yml
+    dest: "{{metric_root_dir}}/config"
+  tags:
+    # - start
+    - met_config
+    - never
+
+
+- name: remove metric
+  file:
+    path: '{{user_root_dir}}/metricbeat'
+    state: absent
+
+  when: met.stat.isdir is defined
+  tags:
+    - met_remove
+    - never

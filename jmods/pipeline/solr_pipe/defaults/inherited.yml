@@ -1,0 +1,14 @@
+---
+#these variables will be requested from Janus control program
+# any variables in an inherit file will load the global variables
+
+processes:
+threads:
+load_duration:
+replicas:
+query:
+loop_type:
+shards:
+solrnum:
+instances:
+engine:

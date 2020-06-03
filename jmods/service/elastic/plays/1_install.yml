@@ -1,0 +1,116 @@
+---
+
+#### ACTIVATE ####
+
+- name: ELASTIC --> random elastic complaining about this
+  shell: sysctl -w vm.max_map_count=262144
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+- name: ELASTIC ---> make sure clean slate before install
+  block:
+    - name: ELASTIC ---> rm previous elastic
+      file:
+        path: "{{es_root_dir}}"
+        state: absent
+      ignore_errors: yes
+
+    - name: ELASTIC ---> rm tmp
+      file:
+        path: '{{home}}/tmp'
+        state: absent
+      ignore_errors: yes
+
+    - name: ELASTIC ---> mkdir tmp
+      file:
+        path: '{{home}}/tmp'
+        state: directory
+      ignore_errors: yes
+
+  tags:
+    - activate
+
+- name: ELASTIC ---> install
+  block:
+    - name: ELASTIC ---> download and unpack
+      unarchive:
+        remote_src: yes
+        src: "{{es_download_dict[es_version]}}"
+        dest: '{{home}}/tmp'
+
+    - name: ELASTIC ---> get name of dir
+      shell: ls tmp | grep "{{es_version}}"
+      register: _esdir
+
+    - name: ELASTIC ---> mv dir to root
+      copy:
+        remote_src: yes
+        src: "{{home}}/tmp/{{_esdir['stdout']}}/."
+        dest: "{{es_root_dir}}"
+
+    - name: ELASTIC ---> rm tmp
+      file:
+        path: '{{home}}/tmp'
+        state: absent
+      ignore_errors: yes
+
+  tags:
+    - activate
+
+
+- name: mk es log dir
+  file:
+    path: "{{es_log_dir}}"
+    state: directory
+    mode: "777"
+    recurse: yes
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+- name: mk es data dir
+  file:
+    path: "{{es_data_dir}}"
+    state: directory
+    mode: "777"
+    recurse: yes
+  become: yes
+  become_user: root
+  tags:
+    - activate
+
+
+
+
+#### DEACTIVATE ####
+
+- name: ELASTIC ---> uninstall elastic and rm data and logs
+  block:
+    - name: ELASTIC ---> uninstall
+      file:
+        path: "{{es_root_dir}}"
+        state: absent
+
+    - name: ELASTIC ---> delete es log dir
+      file:
+        path: "{{es_log_dir}}"
+        state: absent
+        mode: "777"
+        recurse: yes
+      become: yes
+      become_user: root
+
+    - name: ELASTIC -->> delete es data dir
+      file:
+        path: "{{es_data_dir}}"
+        state: absent
+        mode: "777"
+        recurse: yes
+      become: yes
+      become_user: root
+
+  tags:
+    - deactivate
