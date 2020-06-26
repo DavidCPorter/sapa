@@ -6,7 +6,7 @@ SAPA is a project to evaluate the performance of two cloud-native search engines
 
 
 
-####MOTIVATION
+#### MOTIVATION
 The state space for search engines is incredibly large (fig1). The immense configuration options and ancillary support systems creates this overwhelming state space. Consequentially, tuning these search engine systems for optimal performance requires a lot of guesswork since there is no silver bullet when it comes to the best configuration and **deployment techniques**. SAPA takes the guesswork out of performance tuning by providing a tight feedback loop on the performance of your deployment strategies.  
 ***deployment techniques** cover strategies external to search engine config files. e.g. load balancers, external caching, network functions etc.*
  
