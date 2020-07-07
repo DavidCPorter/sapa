@@ -1,4 +1,4 @@
-## Solrcloud vs Elastic performance evaluation with JANUS cloud-native benchmarking framework
+## Evaluation of 12 SolrCloud deployments with JANUS cloud-native benchmarking framework
 
 ## OVERVIEW
 
@@ -103,7 +103,7 @@ The two experiments evaluate the query performance of 12 different search engine
 ###### max throughput
 ![fig](utils/img/cloud-aware/solrj_max_throughput.png)
 ###### horizontal scale
-![fig](utils/img/cloud-aware/solrj_horizontal_scaling.png)
+![fig](utils/img/roundrobin/round_robin_scale.png)
 
 #### CLOUD-AWARE LOAD BALANCER RESULTS:
 ###### cdf(concurrent_connections)
