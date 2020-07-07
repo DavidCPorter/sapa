@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-SAPA is a project to evaluate the performance of two cloud-native search engines, solrcloud and elastic. To help manage and orchestrate the benchmark experiment, SAPA used the cloud-native benchmarking framework, JANUS. The purpose of SAPA is to quickly discover optimal deployment strategies given organizational constraints. 
+SAPA is a project to evaluate the performance of 24 cloud-native search engine deployments using solrcloud. To help manage and orchestrate the benchmark experiment, SAPA used the cloud-native benchmarking framework, JANUS. The purpose of SAPA is to quickly discover optimal deployment strategies given organizational constraints. 
 
 
 
